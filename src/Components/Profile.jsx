@@ -1,10 +1,11 @@
-import React from 'react';
+import React from 'react'
+import style from './Profile.module.css'
 
-const Profile =() =>{
+const Profile = () => {
     return (
-        <div>
-            <div className='content'>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Wide_lightning.jpg" width='100%'/>
+        <div className={style.content}>
+            <div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Wide_lightning.jpg" width='95%'/>
             </div>
             <div>
                 avatar + description

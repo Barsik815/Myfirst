@@ -1,8 +1,10 @@
-import React from 'react';
+import React from 'react'
+import style from './Nav.module.css'
 
 const Nav =() =>{
     return (
-        <nav className='nav'>
+        <nav className={style.nav}>
+            <div className={style.item}>
             <div>
                 <a>Profile</a>
             </div>
@@ -18,6 +20,7 @@ const Nav =() =>{
             <div>
                 <a>Settings</a>
             </div>
+                </div>
         </nav>
     )
 }
