@@ -1,9 +1,22 @@
 .nav {
-    background-color: #96bb7c;
+    background-color: #B5CDA3;
     grid-area: n;
+    padding-top: 10px;
+
 }
-.item   {
-    color: white;
+
+.item {
     text-align: center;
     width: 200px;
+    padding-bottom: 2px;
+}
+
+.item a {
+    color: white;
+    text-decoration: none;
+    padding-bottom: 2px;
+}
+
+.item a.activeLink {
+    color: gold
 }

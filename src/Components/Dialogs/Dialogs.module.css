@@ -1,0 +1,25 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    padding: 10px;
+}
+
+.ppl {
+
+}
+
+.ppl  .active    {
+    color: gold;
+}
+
+.person {
+
+}
+
+.chat {
+
+}
+
+.message {
+
+}
