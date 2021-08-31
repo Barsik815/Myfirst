@@ -17,25 +17,19 @@ const Chat = (props) => {
     )
 }
 
-const Dialogs = () => {
+const Dialogs = (props) => {
+
+    let personlist = props.persondata.map (p=> <Person name={p.name}  id={p.id}/>)
+    let messagelist = props.messagedata.map (m=> <Chat message={m.message}  id={m.id}/>)
+
     return (<div className={s.dialogs}>
             <div className={s.ppl}>
-                <Person name='Maksim' id='1' />
-                <Person name='Ivan' id='2' />
-                <Person name='Katya' id='3' />
-                <Person name='Bogdan' id='4' />
-                <Person name='Diana' id='5' />
-                <Person name='Ellie' id='6' />
-                <Person name='Sasha' id='7' />
+                {personlist}
             </div>
             <div className={s.chat}>
-                <Chat message='Hey!' />
-                <Chat message='How do you do?' />
-                <Chat message="I've just arrived to Ukraine!" />
-                <Chat message='Are you there?' />
+                {messagelist}
             </div>
         </div>
     )
 }
-
 export default Dialogs;
