@@ -6,21 +6,34 @@ const Person = (props) =>{
     let path = "/dialogs/" + props.id;
     return (
         <div className={s.person}>
-            <NavLink to={path}>{props.name}</NavLink>
+            <NavLink to={path} className={s.link}><img src={props.img} alt="" />{props.name}</NavLink>
         </div>
     )
 }
 
 const Chat = (props) => {
     return (
-        <div className={s.message}>{props.message}</div>
+        <div className={s.chat}>
+            <div>{props.message}</div>
+            </div>      
     )
 }
 
 const Dialogs = (props) => {
 
-    let personlist = props.persondata.map (p=> <Person name={p.name}  id={p.id}/>)
-    let messagelist = props.messagedata.map (m=> <Chat message={m.message}  id={m.id}/>)
+    let personlist = props.state.personData.map(p=> <Person name={p.name}  id={p.id} img={p.img}/>)
+    let messagelist = props.state.messageData.map(m=> <Chat message={m.message}  id={m.id}/>)
+    
+    let newMessage = React.createRef();
+
+    let sendMessage = () => {
+        props.sendMessage();
+        props.updateMessageText('');
+    }
+    let onMessageChange = () =>{
+        let text = newMessage.current.value;
+        props.updateMessageText(text);
+    }
 
     return (<div className={s.dialogs}>
             <div className={s.ppl}>
@@ -28,6 +41,10 @@ const Dialogs = (props) => {
             </div>
             <div className={s.chat}>
                 {messagelist}
+                <div>
+            <textarea ref={newMessage} onChange={onMessageChange} value={props.state.messageText}/>
+            <button onClick={sendMessage}>Send</button>
+        </div>
             </div>
         </div>
     )

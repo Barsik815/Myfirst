@@ -1,13 +1,13 @@
 .nav {
+    width: 200px;
     background-color: #B5CDA3;
     grid-area: n;
     padding-top: 10px;
-
+    text-align: center;
+    color: white
 }
 
 .item {
-    text-align: center;
-    width: 200px;
     padding-bottom: 2px;
 }
 
@@ -19,4 +19,17 @@
 
 .item a.activeLink {
     color: gold
+}
+
+.list {
+    display: flex;
+}
+
+.friend {
+    width: 25%;
+    padding: 8px;
+}
+
+.friend img{
+    width: 100%;
 }

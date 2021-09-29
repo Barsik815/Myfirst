@@ -5,7 +5,11 @@
 }
 
 .ppl {
+    color: white;
+}
 
+.ppl img{
+    width: 48px;
 }
 
 .ppl  .active    {
