@@ -3,9 +3,9 @@ import s from './Nav.module.css'
 import { NavLink } from "react-router-dom";
 import Friend from './Friend';
 
-const Nav = (props) => {
+const Sidebar = (props) => {
 
-    let quicklist = props.state.qiuckfriends.map(f => <Friend name={f.name} id={f.id} img={f.img} />)
+    let quicklist = props.sidebarData.qiuckfriends.map(f => <Friend name={f.name} id={f.id} img={f.img} />);
 
     return (<nav className={s.nav}>
         <div>
@@ -14,6 +14,9 @@ const Nav = (props) => {
             </div>
             <div className={s.item}>
                 <NavLink to='/dialogs' activeClassName={s.activeLink}>Messages</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to='/users' activeClassName={s.activeLink}>Users</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to='/news' activeClassName={s.activeLink}>News</NavLink>
@@ -31,5 +34,6 @@ const Nav = (props) => {
         </div>
     </nav>
     )
+
 }
-export default Nav;
+export default Sidebar;

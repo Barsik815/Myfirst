@@ -20,28 +20,25 @@ const Chat = (props) => {
 }
 
 const Dialogs = (props) => {
-
-    let personlist = props.state.personData.map(p => <Person name={p.name} id={p.id} img={p.img} />)
-    let messagelist = props.state.messageData.map(m => <Chat message={m.message} id={m.id} />)
-
-    let newMessage = React.createRef();
+    let personlist = props.dialogsPage.personData.map(p => <Person name={p.name} id={p.id} img={p.img} />)
+    let messagelist = props.dialogsPage.messageData.map(m => <Chat message={m.message} id={m.id} />)
 
     let sendMessage = () => {
-        props.dispatch({type: 'SEND-MESSAGE'})
+        props.sendMessage()
     }
-    let onMessageChange = () => {
-        let text = newMessage.current.value;
-        props.dispatch({type: 'UPDATE-MESSAGE-TEXT', newText: text});
+    let onMessageChange = (ev) => {
+        let body = ev.target.value;
+        props.updateMessageBody(body);
     }
 
     return (<div className={s.dialogs}>
-        <div className={s.ppl}>
+        <div className= {s.ppl}>
             {personlist}
         </div>
         <div className={s.chat}>
             {messagelist}
             <div>
-                <textarea ref={newMessage} onChange={onMessageChange} value={props.state.messageText} />
+                <textarea  onChange={onMessageChange} value={props.dialogsPage.messageText}/>
                 <button onClick={sendMessage}>Send</button>
             </div>
         </div>
