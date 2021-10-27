@@ -1,44 +1,45 @@
 import React from "react";
 import s from './Users.module.css'
+import userPhoto from '../Assets/Images/profile-icon-png-912.png'
 
-let Users = (props) => {
-if (props.users.length===0)
-    {
-        props.setUsers([
-            { id: 1, following: true, fullname: 'Dmitry', status: 'Boss', location: { country: 'Belarus', city: 'Minsk' }, photoUrl: 'https://www.biography.com/.image/t_share/MTE5NTU2MzE2MTgxNjYxMTk1/anton-chekhov-9245947-1-402.jpg', },
-            { id: 2, following: false, fullname: 'Sasha', status: 'Boss', location: { country: 'Russia', city: 'Moscow' }, photoUrl: 'https://www.biography.com/.image/t_share/MTE5NTU2MzE2MTgxNjYxMTk1/anton-chekhov-9245947-1-402.jpg', },
-            { id: 3, following: true, fullname: 'Lena', status: 'Boss', location: { country: 'Ukrain', city: 'Kiew' }, photoUrl: 'https://www.biography.com/.image/t_share/MTE5NTU2MzE2MTgxNjYxMTk1/anton-chekhov-9245947-1-402.jpg', },
-        ])
+const Users = (props) => {
+        let totalPages = Math.ceil(props.usersCount / props.pageSize);
+        let pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
     }
-    return (
-        <div>
-            {
-                props.users.map(u => <div key={u.id}>
+        return (
+            <div>
+                {pages.map(p => {
+                    return <span className={props.currentPage === p && s.selectedPage}
+                                 onClick={() => props.onPageChange(p)}>{p} </span>
+                })}
+                {props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photoUrl} className={s.avatar} />
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.avatar}/>
                         </div>
-                        <div> {u.following ?
-                            <button onClick={() => { props.unfollow(u.id) }}>UNFOLLOW</button> :
-                            <button onClick={() => { props.follow(u.id) }}>FOLLOW</button>}</div>
+                        <div>
+                            <button
+                                onClick={() => props.following(u.id)}>{u.followed ? "UNFOLLOW" : "FOLLOW"}</button> </div>
                     </span>
-
-                    <span>
                         <span>
-                            <div>{u.fullname}</div>
+                        <span>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
-                        <span>
+                            {/*<div>{u.location.country}</div>
+                        <div>{u.location.city}</div>*/}
+                            <span>
 
                         </span>
                     </span>
-                </div>
+                    </div>
                 )
-            }
-        </div>
-    )
-}
+                }
+            </div>
+        )
+    }
+
 
 export default Users;

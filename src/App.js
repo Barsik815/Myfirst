@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import './App.css';
 import Header from './Components/Header/Header.jsx'
 import SidebarContainer from './Components/Nav/SidebarContainer.jsx'
@@ -12,15 +12,15 @@ import UsersContainer from './Components/Users/UsersContainer';
 const App = (props) => {
     return (
         <div className='app-wrapper'>
-            <Header />
+            <Header/>
             <SidebarContainer/>
             <div className='app-wrapper-content'>
-                <Route path='/profile' render={() => <Profile/>} />
-                <Route path='/dialogs' render={() => <DialogsContainer/>} />
-                <Route path='/users' render={() => <UsersContainer/>} />
-                <Route path='/news' render={() => <Dialogs />} />
-                <Route path='/music' render={() => <Dialogs />} />
-                <Route path='/settings' render={() => <Dialogs />} />
+                <Route path='/profile' render={() => <Profile/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                <Route path='/users' render={() => <UsersContainer/>}/>
+                <Route path='/news' render={() => <Dialogs/>}/>
+                <Route path='/music' render={() => <Dialogs/>}/>
+                <Route path='/settings' render={() => <Dialogs/>}/>
             </div>
         </div>
     );
