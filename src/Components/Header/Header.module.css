@@ -8,3 +8,30 @@
     width: 60px;
     border-radius: 21px;
 }
+
+.UserName {
+    color: white;
+    float: right;
+    margin: 18px;
+    font-size: 20px;
+}
+
+.loginBlock {
+    float: right;
+    background-color: #184d47;
+    border: 2px solid white;
+    border-radius: 6px;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    margin: 6px 8px 6px 6px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.loginBlock:hover {
+    background-color: white;
+    border-color: #184d47;
+    color: #184d47
+}
