@@ -6,15 +6,15 @@ const ProfileInfo = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
-
+console.log(props)
     return (
         <div className={s.info}>
             <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Wide_lightning.jpg" width='95%'/>
             </div>
             <div className={s.description}>
-                {console.log(props)}
                 <img src={props.profile.photos.large}/>
+                <p>{props.profile.aboutMe}</p>
                 avatar + description
             </div>
         </div>

@@ -1,29 +1,25 @@
 import React from "react";
 import {connect} from "react-redux";
-import {follow, unfollow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, toggleFollowingProcess}
+import {
+    follow,
+    unfollow,
+    setCurrentPage,
+    toggleFollowingProcess,
+    getUsers,
+}
     from "../../Redux/UsersReducer";
 import Users from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
 
 class UsersClass extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount)
-        })
-
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChange = (pageNumber) => {
-        this.props.toggleIsFetching(true);
+        this.props.getUsers(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber);
-        getUsers(pageNumber, this.props.pageSize).then((data) => {
-            this.props.setUsers(data.items);
-            this.props.toggleIsFetching(false);
-        })
+
     }
 
     render() {
@@ -39,10 +35,9 @@ class UsersClass extends React.Component {
                    usersCount={this.props.usersCount}
                    currentPage={this.props.currentPage}
                    onPageChange={this.onPageChange}
-                   follow={this.props.follow}
                    unfollow={this.props.unfollow}
+                   follow={this.props.follow}
                    followingProcess={this.props.followingProcess}
-                   toggleFollowingProcess={this.props.toggleFollowingProcess}
             />
         </>
     }
@@ -60,7 +55,8 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-        follow, unfollow, setUsers, setTotalUsersCount, setCurrentPage, toggleIsFetching, toggleFollowingProcess
+        follow, unfollow, setCurrentPage,
+        toggleFollowingProcess, getUsers: getUsers
     }
 )
 (UsersClass)
