@@ -1,27 +1,14 @@
 import React from "react";
 import s from './Dialogs.module.css'
-import { NavLink } from "react-router-dom";
-
-const Person = (props) => {
-    let path = "/dialogs/" + props.id;
-    return (
-        <div className={s.person}>
-            <NavLink to={path} className={s.link}><img src={props.img} alt="" />{props.name}</NavLink>
-        </div>
-    )
-}
-
-const Chat = (props) => {
-    return (
-        <div className={s.chat}>
-            <div>{props.message}</div>
-        </div>
-    )
-}
+import {Person} from "./Person";
+import {Chat} from "./Chat";
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
-    let personlist = props.dialogsPage.personData.map(p => <Person name={p.name} id={p.id} img={p.img} />)
-    let messagelist = props.dialogsPage.messageData.map(m => <Chat message={m.message} id={m.id} />)
+
+
+    let personList = props.dialogsPage.personData.map(p => <Person name={p.name} id={p.id} img={p.img} />)
+    let messageList = props.dialogsPage.messageData.map(m => <Chat message={m.message} id={m.id} />)
 
     let sendMessage = () => {
         props.sendMessage()
@@ -31,12 +18,14 @@ const Dialogs = (props) => {
         props.updateMessageBody(body);
     }
 
+    if (!props.isAuth) return <Redirect to={'/login'}/>;
+
     return (<div className={s.dialogs}>
         <div className= {s.ppl}>
-            {personlist}
+            {personList}
         </div>
         <div className={s.chat}>
-            {messagelist}
+            {messageList}
             <div>
                 <textarea  onChange={onMessageChange} value={props.dialogsPage.messageText}/>
                 <button onClick={sendMessage}>Send</button>

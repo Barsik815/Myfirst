@@ -10,6 +10,7 @@ import {
     from "../../Redux/UsersReducer";
 import Users from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersClass extends React.Component {
     componentDidMount() {
@@ -50,13 +51,15 @@ let mapStateToProps = (state) => {
         usersCount: state.usersPage.usersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingProcess: state.usersPage.followingProcess
+        followingProcess: state.usersPage.followingProcess,
+        isAuth: state.auth.isAuth
     }
 }
+let AuthRedirectComponent = withAuthRedirect(UsersClass);
 
 export default connect(mapStateToProps, {
         follow, unfollow, setCurrentPage,
         toggleFollowingProcess, getUsers: getUsers
     }
 )
-(UsersClass)
+(AuthRedirectComponent)
