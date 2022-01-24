@@ -7,7 +7,6 @@ const ProfileInfo = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
-console.log(props)
     return (
         <div className={s.info}>
            {/* <div>
@@ -16,7 +15,7 @@ console.log(props)
             <div className={s.description}>
                 <img src={props.profile.photos.large}/>
                 <p>{props.profile.aboutMe}</p>
-                <ProfileStatus status={"Hey"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 avatar + description
             </div>
         </div>

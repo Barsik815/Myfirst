@@ -2,36 +2,39 @@ import React from "react";
 import s from './Dialogs.module.css'
 import {Person} from "./Person";
 import {Chat} from "./Chat";
-import {Redirect} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../FormsControls/FormsControls";
+import {maxLengthCreator, requiredField} from "../../Utils/Validators/validator";
 
 const Dialogs = (props) => {
 
+    let personList = props.dialogsPage.personData.map(p => <Person name={p.name} id={p.id} img={p.img}/>)
+    let messageList = props.dialogsPage.messageData.map(m => <Chat message={m.message} id={m.id}/>)
 
-    let personList = props.dialogsPage.personData.map(p => <Person name={p.name} id={p.id} img={p.img} />)
-    let messageList = props.dialogsPage.messageData.map(m => <Chat message={m.message} id={m.id} />)
-
-    let sendMessage = () => {
-        props.sendMessage()
+    let sendMessage = (values) => {
+        props.sendMessage(values.newMessageBody)
     }
-    let onMessageChange = (ev) => {
-        let body = ev.target.value;
-        props.updateMessageBody(body);
+    let maxLength = maxLengthCreator(250)
+
+    const MessageArea = (props) => {
+        return <form onSubmit={props.handleSubmit}>
+            {/* <textarea  onChange={onMessageChange} value={props.dialogsPage.messageText}/>*/}
+            <Field component={Textarea} placeholder="Enter your message" name="newMessageBody"
+                validate={[requiredField, maxLength]}/>
+            <button>Send</button>
+        </form>
     }
-
-    if (!props.isAuth) return <Redirect to={'/login'}/>;
-
-    return (<div className={s.dialogs}>
-        <div className= {s.ppl}>
-            {personList}
-        </div>
-        <div className={s.chat}>
-            {messageList}
-            <div>
-                <textarea  onChange={onMessageChange} value={props.dialogsPage.messageText}/>
-                <button onClick={sendMessage}>Send</button>
+    const MessageAreaRedux = reduxForm({form: "dialogAddMessageForm"})(MessageArea)
+    return (
+        <div className={s.dialogs}>
+            <div className={s.ppl}>
+                {personList}
+            </div>
+            <div className={s.chat}>
+                {messageList}
+                <MessageAreaRedux onSubmit={sendMessage}/>
             </div>
         </div>
-    </div>
     )
 }
 export default Dialogs;

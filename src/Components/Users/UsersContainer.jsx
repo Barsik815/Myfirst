@@ -1,25 +1,32 @@
 import React from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
 import {
     follow,
     unfollow,
     setCurrentPage,
     toggleFollowingProcess,
-    getUsers,
+    requestUsers,
 }
     from "../../Redux/UsersReducer";
 import Users from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingProcess, getIsAuth,
+    getIsFetching,
+    getPageSize, getUsers,
+    getUsersCount
+} from "../../Redux/usersSelectors";
 
 class UsersClass extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChange = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.requestUsers(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber);
 
     }
@@ -44,7 +51,7 @@ class UsersClass extends React.Component {
         </>
     }
 }
-
+/*
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
@@ -55,13 +62,24 @@ let mapStateToProps = (state) => {
         followingProcess: state.usersPage.followingProcess,
         isAuth: state.auth.isAuth
     }
+}*/
+let mapStateToProps = (state) => {
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        usersCount: getUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingProcess: getFollowingProcess(state),
+        isAuth: getIsAuth(state)
+    }
 }
 
 export default compose(
     withAuthRedirect,
     connect(mapStateToProps, {
             follow, unfollow, setCurrentPage,
-            toggleFollowingProcess, getUsers: getUsers
+            toggleFollowingProcess, requestUsers
         }
     )
 )(UsersClass)
