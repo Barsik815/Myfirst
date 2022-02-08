@@ -18,7 +18,6 @@ const Dialogs = (props) => {
 
     const MessageArea = (props) => {
         return <form onSubmit={props.handleSubmit}>
-            {/* <textarea  onChange={onMessageChange} value={props.dialogsPage.messageText}/>*/}
             <Field component={Textarea} placeholder="Enter your message" name="newMessageBody"
                 validate={[requiredField, maxLength]}/>
             <button>Send</button>

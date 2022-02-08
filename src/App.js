@@ -1,16 +1,17 @@
 import React from 'react';
 import {Preloader} from "./Components/Common/Preloader/Preloader";
-import {Route, withRouter} from 'react-router-dom'
-import {connect} from "react-redux";
+import {BrowserRouter, Route, withRouter} from 'react-router-dom'
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./Redux/AppReducer";
 import Login from "./Components/Login/Login";
 import './App.css';
-import SidebarContainer from './Components/Nav/SidebarContainer.jsx'
+import SidebarContainer from './Components/Nav/SidebarContainer.jsx';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from './Components/Users/UsersContainer';
+import store from "./Redux/ReduxStore";
 
 class App extends React.Component {
     componentDidMount() {
@@ -18,6 +19,7 @@ class App extends React.Component {
     }
 
     render() {
+
         if (!this.props.initialized) {
             return <Preloader/>
         }
@@ -32,6 +34,7 @@ class App extends React.Component {
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
+
         );
     }
 }
@@ -39,7 +42,16 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
 })
-export default compose(
+let AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializeApp}))
-    (App);
+(App);
+
+const MainApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+export default MainApp;
