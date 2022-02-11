@@ -7,11 +7,13 @@ import {initializeApp} from "./Redux/AppReducer";
 import Login from "./Components/Login/Login";
 import './App.css';
 import SidebarContainer from './Components/Nav/SidebarContainer.jsx';
-import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import HeaderContainer from "./Components/Header/HeaderContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from './Components/Users/UsersContainer';
 import store from "./Redux/ReduxStore";
+import {withSuspense} from "./hoc/withSuspense";
+
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
 
 class App extends React.Component {
     componentDidMount() {
@@ -28,8 +30,9 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <SidebarContainer/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)
+                    }/>
+                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>

@@ -12,7 +12,7 @@ const TOGGLE_IS_FOLLOWING_PROCESS = 'TOGGLE_IS_FOLLOWING_PROCESS';
 let initialState = {
     users: [],
     postText: 'sth',
-    pageSize: 7,
+    pageSize: 11,
     usersCount: 0,
     currentPage: 1,
     isFetching: false,

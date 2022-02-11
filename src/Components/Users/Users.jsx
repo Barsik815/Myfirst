@@ -4,7 +4,7 @@ import User from "./User";
 
 const Users = ({users, currentPage, usersCount, onPageChange, pageSize, followingProcess, follow, unfollow}) => {
     return (<div>
-            <Paginator currentPage={currentPage} usersCount={usersCount} onPageChange={onPageChange}
+            <Paginator currentPage={currentPage} itemsCount={usersCount} onPageChange={onPageChange}
                        pageSize={pageSize}
             />
             {users.map(u => <User user={u} key={u.id} followingProcess={followingProcess} follow={follow}
