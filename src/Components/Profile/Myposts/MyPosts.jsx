@@ -6,17 +6,15 @@ import {maxLengthCreator, requiredField} from "../../../Utils/Validators/validat
 import {Textarea} from "../../FormsControls/FormsControls";
 
 const MyPosts = React.memo(props => {
-        console.log('render')
-        let maxLength70 = maxLengthCreator(70)
-        let postElement = [...props.posts].reverse().map(p => <Post id={p.id} message={p.message} likesnumber={p.likesnumber}/>);
+        let maxLength = maxLengthCreator(70)
+        let postElement = [...props.posts].reverse().map(p => <Post key={p.id} id={p.id} message={p.message} likesnumber={p.likesnumber}/>);
         let onAddPost = (values) => {
             props.addPost(values.postText)
         }
         const PostsForm = (props) => {
             return <form onSubmit={props.handleSubmit}>
                 <Field component={Textarea} placeholder="Enter post text" name="postText"
-                       validate={[requiredField, maxLength70]}/>
-                {/*<Field ref={newPost} onChange={onPostChange} value={props.postText} />*/}
+                       validate={[requiredField, maxLength]}/>
                 <button>Add post</button>
             </form>
         }

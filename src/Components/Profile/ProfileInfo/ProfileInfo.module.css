@@ -5,3 +5,9 @@
 .description {
     padding: 10px;
 }
+.profilePhoto {
+    width: 25%;
+}
+.contacts {
+    padding-left: 8px;
+}

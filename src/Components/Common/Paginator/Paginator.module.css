@@ -1,3 +1,10 @@
+.paginator {
+    padding-left: 8px;
+}
 .selectedPage    {
-    font-family: "Arial Black";
+    font-family: "-apple-system", serif;
+}
+.selectedPage.pageNumber {
+    font-weight: bold;
+    font-size: 19px;
 }

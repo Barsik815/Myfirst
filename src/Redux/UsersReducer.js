@@ -83,8 +83,7 @@ export const requestUsers = (currentPage, pageSize) => {
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
         }
-    }
-;
+    };
 export const follow = (userId) => {
     return async (dispatch) => {
         await followUnfollowFlow(dispatch, userId, usersAPI.followAPI, acceptFollow);
@@ -94,6 +93,6 @@ export const unfollow = (userId) => {
     return async (dispatch) => {
         await followUnfollowFlow(dispatch, userId, usersAPI.unfollowAPI, acceptUnfollow);
     }
-}
+};
 
 export default usersReducer;
